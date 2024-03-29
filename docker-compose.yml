@@ -1,0 +1,71 @@
+---
+version: '2'
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    hostname: postgres
+    restart: always
+    ports:
+      - "5436:5432/tcp"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB= appDB
+  auth:
+    image: auth:latest
+    container_name: auth
+    hostname: auth
+    build:
+      context: ./back/authentification
+      dockerfile: Dockerfile
+    ports:
+      - "8882:8083"
+    depends_on:
+      - postgres
+  order:
+    image: order:latest
+    container_name: order
+    hostname: order
+    build:
+      context: ./back/order
+      dockerfile: Dockerfile
+    ports:
+      - "8883:8083"
+    depends_on:
+      - postgres
+  payment:
+    image: payment:latest
+    container_name: payment
+    hostname: payment
+    build:
+      context: ./back/payment
+      dockerfile: Dockerfile
+    ports:
+      - "8884:8083"
+    depends_on:
+      - postgres
+  product:
+    image: product:latest
+    container_name: product
+    hostname: product
+    build:
+      context: ./back/product
+      dockerfile: Dockerfile
+    ports:
+      - "8885:8083"
+    depends_on:
+      - postgres
+  eureka:
+    image: eureka:latest
+    container_name: eureka
+    hostname: eureka
+    build:
+      context: ./back/eureka
+      dockerfile: Dockerfile
+    ports:
+      - "8886:8083"
+    depends_on:
+      - postgres

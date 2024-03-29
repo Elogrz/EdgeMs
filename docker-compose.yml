@@ -38,7 +38,7 @@ services:
       - postgres
   payment:
     image: payment:latest
-    container_name: payment
+    container_name: payments
     hostname: payment
     build:
       context: ./back/payments

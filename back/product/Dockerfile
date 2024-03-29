@@ -1,16 +1,17 @@
+# Étape de build
 FROM maven:3.9.6 AS build
 
-COPY pom.xml /build/pom.xml
-COPY back/product/pom.xml /build/back/product/pom.xml
+# Copie du pom.xml et des sources
+COPY pom.xml .
+COPY src ./src
 
-COPY back/product/src /build/back/product/src
-
-WORKDIR /build/back/product/
-
+# Compilation du projet et skip des tests
 RUN mvn clean package -DskipTests
 
+# Étape finale pour l'exécution
 FROM openjdk:21
 
-COPY --from=build /build/back/product/target/back/product-*.jar /app/back/product.jar
+# Copie du jar construit à l'étape de build
+COPY --from=build /target/*.jar app.jar
 
-ENTRYPOINT ["java","-jar","/app/back/product.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]

@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/EdgeMs.iml" filepath="$PROJECT_DIR$/.idea/EdgeMs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
     </modules>
   </component>
 </project>

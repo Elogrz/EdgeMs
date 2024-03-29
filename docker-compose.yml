@@ -41,7 +41,7 @@ services:
     container_name: payment
     hostname: payment
     build:
-      context: ./back/payment
+      context: ./back/payments
       dockerfile: Dockerfile
     ports:
       - "8884:8083"

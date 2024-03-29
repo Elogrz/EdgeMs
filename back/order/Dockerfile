@@ -1,16 +1,17 @@
+# Étape de build
 FROM maven:3.9.6 AS build
 
-COPY pom.xml /build/pom.xml
-COPY back/order/pom.xml /build/back/order/pom.xml
+# Copie du pom.xml et des sources
+COPY pom.xml .
+COPY src ./src
 
-COPY back/order/src /build/back/order/src
-
-WORKDIR /build/back/order/
-
+# Compilation du projet et skip des tests
 RUN mvn clean package -DskipTests
 
+# Étape finale pour l'exécution
 FROM openjdk:21
 
-COPY --from=build /build/back/order/target/back/order-*.jar /app/back/order.jar
+# Copie du jar construit à l'étape de build
+COPY --from=build /target/*.jar app.jar
 
-ENTRYPOINT ["java","-jar","/app/back/order.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]

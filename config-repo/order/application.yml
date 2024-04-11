@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: order
-
-custom:
-  http:
-    config:
-      url: "https://github.com/Elogrz/EdgeMs.git"

@@ -13,7 +13,7 @@ spring:
   datasource:
     username: admin
     password: admin
-    url: jdbc:postgresql://postgres:5436/appDB
+    url: jdbc:postgresql://postgres:5432/appDB
   jpa:
     properties:
       hibernate:

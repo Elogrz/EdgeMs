@@ -6,6 +6,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/Elogrz/EdgeMs.git
+          uri: https://Elogrz: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@github.com/Elogrz/EdgeMs.git
+          searchPaths: config-repo
           default-label: main
-          token : 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
+          token : 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

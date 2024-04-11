@@ -25,6 +25,7 @@ services:
       - "8882:8083"
     depends_on:
       - postgres
+      - config-server
   order:
     image: order:latest
     container_name: order
@@ -36,6 +37,7 @@ services:
       - "8883:8083"
     depends_on:
       - postgres
+      - config-server
   payment:
     image: payment:latest
     container_name: payments
@@ -47,6 +49,7 @@ services:
       - "8884:8083"
     depends_on:
       - postgres
+      - config-server
   product:
     image: product:latest
     container_name: product
@@ -58,6 +61,7 @@ services:
       - "8885:8083"
     depends_on:
       - postgres
+      - config-server
   eureka:
     image: eureka:latest
     container_name: eureka
@@ -67,5 +71,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8886:8083"
+    depends_on:
+      - postgres
+      - config-server
+  config-server:
+    image: config-server:latest
+    container_name: config-server
+    hostname: config-server
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
     depends_on:
       - postgres

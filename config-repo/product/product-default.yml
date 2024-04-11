@@ -3,6 +3,11 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
 
+custom:
+  http:
+    config:
+      url: "https://Elogrz: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@github.com/Elogrz/EdgeMs.git"
+
 spring:
   cloud:
     config:

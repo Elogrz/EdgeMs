@@ -1,6 +1,6 @@
 spring:
   application:
-    name: nom-du-microservice
+    name: authentification
   cloud:
     config:
       uri: http://localhost:8888

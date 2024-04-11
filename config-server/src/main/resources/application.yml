@@ -3,8 +3,7 @@ server:
   port: 8888 # le port de Spring Cloud Config
 spring:
   application:
-    name:
-      config-server
+    name: config-server
   cloud:
     config:
       server:
@@ -12,4 +11,4 @@ spring:
           uri: https://Elogrz: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@github.com/Elogrz/EdgeMs.git
           searchPaths: config-repo
           default-label: elo
-          token : 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
+          token: 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

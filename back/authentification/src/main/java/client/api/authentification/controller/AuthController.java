@@ -3,6 +3,8 @@ package client.api.authentification.controller;
 import client.api.authentification.model.Client;
 import client.api.authentification.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ public class AuthController {
 
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
     public Client register(@RequestParam String username, @RequestParam String password) {
@@ -26,7 +31,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password) {
-        return "redirect:/home"; // Redirigez vers la page d'accueil après connexion
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(username, password));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        return "redirect:/home";
     }
 
     @GetMapping("/login")
@@ -36,10 +46,7 @@ public class AuthController {
 
     @GetMapping("/logout")
     public String logout() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            SecurityContextHolder.clearContext();
-        }
+        SecurityContextHolder.clearContext();
         return "redirect:/";
     }
 }

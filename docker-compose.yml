@@ -25,7 +25,7 @@ services:
       context: ./back/authentification
       dockerfile: Dockerfile
     ports:
-      - "8882:8083"
+      - "8882:8882"
     depends_on:
       - postgres
       - config-server
@@ -37,7 +37,7 @@ services:
       context: ./back/order
       dockerfile: Dockerfile
     ports:
-      - "8883:8083"
+      - "8883:8883"
     depends_on:
       - postgres
       - config-server
@@ -49,7 +49,7 @@ services:
       context: ./back/payments
       dockerfile: Dockerfile
     ports:
-      - "8884:8083"
+      - "8884:8884"
     depends_on:
       - postgres
       - config-server
@@ -61,7 +61,7 @@ services:
       context: ./back/product
       dockerfile: Dockerfile
     ports:
-      - "8885:8083"
+      - "8885:8885"
     depends_on:
       - postgres
       - config-server
@@ -73,7 +73,7 @@ services:
       context: ./back/eureka
       dockerfile: Dockerfile
     ports:
-      - "8886:8083"
+      - "8886:8886"
     depends_on:
       - postgres
       - config-server

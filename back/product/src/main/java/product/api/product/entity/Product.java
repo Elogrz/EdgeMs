@@ -17,7 +17,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String description;
     private float price;
+    private float quantity;
+    private String imageURL;
+
     // Constructeur par défaut
     public Product() {
     }
@@ -27,7 +31,10 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", price=" + price +
+                ", quantity=" + quantity +
+                ", imageURL='" + imageURL + '\'' +
                 '}';
     }
 }

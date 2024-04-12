@@ -13,10 +13,3 @@ eureka:
     fetchRegistry: false
   server:
     enableSelfPreservation: false
-
- 
-#   cloud:
-#     config:
-#       uri: http://config-server:8888  # URL du serveur de configuration
-#   profiles:
-#     active: default  # Profil actif

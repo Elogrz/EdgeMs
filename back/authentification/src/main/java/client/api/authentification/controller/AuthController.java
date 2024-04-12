@@ -26,9 +26,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password) {
-        // Vérifiez si l'utilisateur existe dans la base de données
-        // Si l'utilisateur existe, vous pouvez utiliser Spring Security pour gérer l'authentification automatiquement
-        return "Logged in successfully!";
+        return "redirect:/home"; // Redirigez vers la page d'accueil après connexion
+    }
+
+    @GetMapping("/login")
+    public String getLoginPage() {
+        return "login";
     }
 
     @GetMapping("/logout")
@@ -37,7 +40,7 @@ public class AuthController {
         if (auth != null) {
             SecurityContextHolder.clearContext();
         }
-        return "Logged out successfully!";
+        return "redirect:/";
     }
 }
 

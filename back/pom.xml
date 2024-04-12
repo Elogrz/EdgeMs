@@ -21,6 +21,7 @@
         <module>order</module>
         <module>payments</module>
         <module>product</module>
+        <module>zuul</module>
     </modules>
 
     <dependencyManagement>

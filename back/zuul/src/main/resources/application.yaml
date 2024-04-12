@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 spring:
   application:
     name: zuul
@@ -9,3 +10,16 @@ spring:
   
   config:
     import: "configserver:http://config-server:8888"  # Importation de la configuration du serveur de config
+=======
+spring:
+  application:
+    name: zuul
+  cloud:
+    config:
+      uri: http://config-server:8888
+  profiles:
+    active: development
+  
+  config:
+    import: "configserver:http://config-server:8888"  # Importation de la configuration du serveur de config
+>>>>>>> b613d12 (final client + ZUUUUUL 1)

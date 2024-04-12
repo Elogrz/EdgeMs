@@ -76,6 +76,7 @@ services:
     ports:
       - "8083:8083"
     depends_on:
+<<<<<<< HEAD
       config-server:
         condition: service_healthy
     healthcheck:
@@ -85,6 +86,25 @@ services:
       start_period: 20s
       timeout: 10s
     restart: on-failure
+=======
+      - postgres
+      - config-server
+
+    zuul:
+      image: zuul-gateway:latest
+      container_name: zuul
+      ports:
+        - "8889:8889"
+      build:
+        context: ./back/zuul
+        dockerfile: Dockerfile
+      depends_on:
+        - eureka
+      environment:
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8886/eureka/
+
+
+>>>>>>> b613d12 (final client + ZUUUUUL 1)
   config-server:
     image: config-server:latest
     container_name: config-server

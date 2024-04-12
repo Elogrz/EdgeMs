@@ -2,10 +2,10 @@ spring:
   application:
     name: eureka # Assurez-vous que ceci est le nom de votre application cliente, pas simplement 'eureka'
   config:
-    import: "optional:configserver:http://localhost:8888"
+    import: "optional:configserver:http://config-server:8888"
 
 server:
-  port: 8888
+  port: 8886
 
 eureka:
   client:
@@ -13,3 +13,10 @@ eureka:
     fetchRegistry: false
   server:
     enableSelfPreservation: false
+
+ 
+#   cloud:
+#     config:
+#       uri: http://config-server:8888  # URL du serveur de configuration
+#   profiles:
+#     active: default  # Profil actif

@@ -9,4 +9,4 @@ spring:
         git:
           uri: https://github.com/Elogrz/EdgeMs.git
           searchPaths: config-repo
-          default-label: elo
+          default-label: main

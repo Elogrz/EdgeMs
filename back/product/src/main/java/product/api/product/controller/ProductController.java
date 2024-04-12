@@ -10,19 +10,19 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
     ProductRepo productRepo;
 
-    @GetMapping("")
-    public List<Product> getPerson(){
+    @GetMapping("/")
+    public List<Product> getAll(){
         System.out.println(productRepo.findAll());
         return productRepo.findAll();
     }
     @PostMapping("/")
-    public void addPerson(@RequestBody Product product){
+    public void addProduct(@RequestBody Product product){
         System.out.println(product.toString());
         productRepo.save(product);
     }

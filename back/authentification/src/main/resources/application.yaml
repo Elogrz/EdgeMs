@@ -6,3 +6,6 @@ spring:
       uri: http://config-server:8888  # URL du serveur de configuration
   profiles:
     active: default  # Profil actif
+
+  config:
+    import: "configserver:http://config-server:8888"

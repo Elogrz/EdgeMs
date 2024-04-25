@@ -6,8 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import org.springframework.data.annotation.Id;
 
-@Table(name = "client")
 @Entity
+@Table(name = "client")
 public class Client {
 
     @Id
@@ -15,6 +15,16 @@ public class Client {
     private Long id;
     private String username;
     private String password;
+
+    public Client(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Client() {
+
+    }
 
     // Getters and setters
     public Long getId() {

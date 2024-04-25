@@ -5,10 +5,13 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/back/authentification/pom.xml" />
         <option value="$PROJECT_DIR$/back/eureka/pom.xml" />
         <option value="$PROJECT_DIR$/back/order/pom.xml" />
         <option value="$PROJECT_DIR$/back/payments/pom.xml" />
+=======
+>>>>>>> faa946b (feature: add web config)
         <option value="$PROJECT_DIR$/back/product/pom.xml" />
       </list>
     </option>

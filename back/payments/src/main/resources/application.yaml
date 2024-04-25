@@ -1,8 +1,11 @@
 spring:
   application:
-    name: payments
+    name: payments  # Nom de l'application
   cloud:
     config:
-      uri: http://config-server:8888
+      uri: http://config-server:8888  # URL du serveur de configuration
   profiles:
-    active: development
+    active: default  # Profil actif
+
+  config:
+    import: "configserver:http://config-server:8888"  # Importation de la configuration du serveur de config

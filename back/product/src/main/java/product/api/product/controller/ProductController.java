@@ -46,7 +46,7 @@ public class ProductController {
             product.setDescription(productDetails.getDescription());
             product.setPrice(productDetails.getPrice());
             product.setQuantity(productDetails.getQuantity());
-            product.setImageURL(productDetails.getImageURL());
+            product.setImageUrl(productDetails.getImageUrl());
 
             productRepo.save(product);
             return ResponseEntity.ok(product);

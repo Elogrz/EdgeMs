@@ -20,7 +20,7 @@ public class Product {
     private String description;
     private float price;
     private float quantity;
-    private String imageURL;
+    private String imageUrl;
 
     // Constructeur par défaut
     public Product() {
@@ -34,7 +34,7 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
-                ", imageURL='" + imageURL + '\'' +
+                ", imageURL='" + imageUrl + '\'' +
                 '}';
     }
 }

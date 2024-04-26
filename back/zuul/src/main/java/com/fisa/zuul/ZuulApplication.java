@@ -37,6 +37,10 @@ public class ZuulApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ZuulApplication.class, args);
 	}
+<<<<<<< HEAD
 
 }
 >>>>>>> b613d12 (final client + ZUUUUUL 1)
+=======
+}
+>>>>>>> f3077b7 (last change)

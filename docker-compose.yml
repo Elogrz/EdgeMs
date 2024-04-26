@@ -78,18 +78,18 @@ services:
       - postgres
       - config-server
 
-    zuul:
-      image: zuul-gateway:latest
-      container_name: zuul
-      ports:
-        - "8889:8889"
-      build:
-        context: ./back/zuul
-        dockerfile: Dockerfile
-      depends_on:
-        - eureka
-      environment:
-        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8886/eureka/
+  zuul:
+    image: zuul-gateway:latest
+    container_name: zuul
+    ports:
+      - "8889:8889"
+    build:
+      context: ./back/zuul
+      dockerfile: Dockerfile
+    depends_on:
+      - eureka
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8886/eureka/
 
 
   config-server:

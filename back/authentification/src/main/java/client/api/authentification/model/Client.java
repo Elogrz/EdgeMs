@@ -12,12 +12,16 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String lastName;
+    private String firstName;
+    private Number tel;
+    private String email;
+    private String addressId;
     private String password;
 
-    public Client(Long id, String username, String password) {
+    public Client(Long id, String email, String password) {
         this.id = id;
-        this.username = username;
+        this.email = email;
         this.password = password;
     }
 
@@ -34,12 +38,44 @@ public class Client {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public Number getTel() {
+        return tel;
+    }
+
+    public void setTel(Number tel) {
+        this.tel = tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
     }
 
     public String getPassword() {

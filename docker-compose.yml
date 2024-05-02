@@ -40,9 +40,8 @@ services:
     ports:
       - "8883:8883"
     depends_on:
-      - postgres
-      - config-server
-    restart: on-failure
+      eureka:
+        condition: service_healthy
   payment:
     image: payment:latest
     container_name: payments
@@ -53,9 +52,8 @@ services:
     ports:
       - "8884:8884"
     depends_on:
-      - postgres
-      - config-server
-    restart: on-failure
+      eureka:
+        condition: service_healthy
   product:
     image: product:latest
     container_name: product

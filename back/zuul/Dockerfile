@@ -1,26 +1,17 @@
-# Étape 1: Construction avec Maven
-FROM maven:3.8.4-openjdk-11 as build
-WORKDIR /app
+# Étape de build
+FROM maven:3.9.6 AS build
 
-# Copier le pom.xml et les sources
+# Copie du pom.xml et des sources
 COPY pom.xml .
 COPY src ./src
 
-# Télécharger toutes les dépendances nécessaires
-RUN mvn dependency:go-offline
+# Compilation du projet et skip des tests
+RUN mvn clean package -DskipTests
 
-# Compiler le projet
-RUN mvn package -DskipTests
+# Étape finale pour l'exécution
+FROM openjdk:21
 
-# Étape 2: Exécution avec JRE
-FROM openjdk:11-jre-slim
-WORKDIR /app
+# Copie du jar construit à l'étape de build
+COPY --from=build /target/*.jar app.jar
 
-# Copier le JAR empaqueté depuis l'étape de construction à l'étape d'exécution
-COPY --from=build /app/target/zuul-gateway*.jar zuul-gateway.jar
-
-# Exposer le port sur lequel Zuul s'exécute
-EXPOSE 8889
-
-# Exécuter l'application
-CMD ["java", "-jar", "zuul-gateway.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]

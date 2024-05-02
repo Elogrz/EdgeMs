@@ -2,14 +2,4 @@ spring:
   application:
     name: eureka # Assurez-vous que ceci est le nom de votre application cliente, pas simplement 'eureka'
   config:
-    import: "optional:configserver:http://localhost:8888"
-
-server:
-  port: 8083
-
-eureka:
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-  server:
-    enableSelfPreservation: false
+    import: "optional:configserver:http://config-server:8888"

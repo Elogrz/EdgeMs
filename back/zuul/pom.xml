@@ -84,7 +84,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version>
+		<version>3.2.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.fisa</groupId>
@@ -93,7 +93,7 @@
 	<name>zuul</name>
 	<description>Zuul</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.1</spring-cloud.version> <!-- Utilisez cette propriété pour gérer la version de Spring Cloud -->
 	</properties>
 	<dependencies>
@@ -147,7 +147,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
 				<configuration>
-					<release>11</release>
+					<release>17</release>
 				</configuration>
 			</plugin>
 		</plugins>

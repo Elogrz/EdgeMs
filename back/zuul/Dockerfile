@@ -24,8 +24,12 @@ FROM openjdk:11-jdk-slim as build
 # Définir le répertoire de travail dans le conteneur
 =======
 # Étape 1: Construction avec Maven
+<<<<<<< HEAD
 FROM maven:3.8.4-openjdk-11 as build
 >>>>>>> f3077b7 (last change)
+=======
+FROM maven:3.8.4-openjdk-17 AS build  # Utilisation de Maven avec JDK 17
+>>>>>>> 15d5ab7 (updating in java 17 (doesn't work))
 WORKDIR /app
 
 # Copier le pom.xml et les sources
@@ -39,7 +43,7 @@ RUN mvn dependency:go-offline
 RUN mvn package -DskipTests
 
 # Étape 2: Exécution avec JRE
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jre-slim  # Utilisation de la version JRE slim de JDK 17 pour l'exécution
 WORKDIR /app
 
 # Copier le JAR empaqueté depuis l'étape de construction à l'étape d'exécution

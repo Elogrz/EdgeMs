@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -33,6 +34,8 @@ build/
 ### VS Code ###
 .vscode/
 =======
+=======
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -66,4 +69,7 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 >>>>>>> b613d12 (final client + ZUUUUUL 1)
+=======
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5

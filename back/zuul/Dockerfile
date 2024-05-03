@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Étape de build
 FROM maven:3.9.6 AS build
 
@@ -30,6 +31,10 @@ FROM maven:3.8.4-openjdk-11 as build
 =======
 FROM maven:3.8.4-openjdk-17 AS build  # Utilisation de Maven avec JDK 17
 >>>>>>> 15d5ab7 (updating in java 17 (doesn't work))
+=======
+# Étape 1: Construction avec Maven
+FROM maven:3.8.4-openjdk-17 AS build  # Utilisation de Maven avec JDK 17
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5
 WORKDIR /app
 
 # Copier le pom.xml et les sources
@@ -54,4 +59,7 @@ EXPOSE 8889
 
 # Exécuter l'application
 CMD ["java", "-jar", "zuul-gateway.jar"]
+<<<<<<< HEAD
 >>>>>>> b613d12 (final client + ZUUUUUL 1)
+=======
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5

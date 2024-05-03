@@ -55,7 +55,10 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5
 	</dependencies>
 
 	<dependencyManagement>

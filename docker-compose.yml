@@ -17,6 +17,7 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_DB=appDB
       - POSTGRES_HOST_AUTH_METHOD=trust
+<<<<<<< HEAD
 # authentification:
 #    image: authentification:latest
 #    container_name: authentification
@@ -30,6 +31,20 @@ services:
       #- postgres
       #- config-server
     #restart: on-failure
+=======
+  auth:
+    image: auth:latest
+    container_name: auth
+    hostname: auth
+    build:
+      context: ./back/authentification
+      dockerfile: Dockerfile
+    ports:
+      - "8882:8882"
+    depends_on:
+      - postgres
+      - config-server
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5
   order:
     image: order:latest
     container_name: order
@@ -74,7 +89,11 @@ services:
       context: ./back/eureka
       dockerfile: Dockerfile
     ports:
+<<<<<<< HEAD
       - "8083:8083"
+=======
+      - "8886:8886"
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5
     depends_on:
 <<<<<<< HEAD
       config-server:
@@ -104,7 +123,10 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8886/eureka/
 
 
+<<<<<<< HEAD
 >>>>>>> b613d12 (final client + ZUUUUUL 1)
+=======
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5
   config-server:
     image: config-server:latest
     container_name: config-server

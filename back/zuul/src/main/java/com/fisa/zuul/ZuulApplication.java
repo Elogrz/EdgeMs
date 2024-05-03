@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 package com.fisa.zuul;
 
 import org.springframework.boot.SpringApplication;
@@ -19,6 +20,8 @@ public class ZuulApplication {
 	}
 }
 =======
+=======
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5
 package com.fisa.zuul;
 
 import org.springframework.boot.SpringApplication;
@@ -38,9 +41,13 @@ public class ZuulApplication {
 		SpringApplication.run(ZuulApplication.class, args);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 }
 >>>>>>> b613d12 (final client + ZUUUUUL 1)
 =======
 }
 >>>>>>> f3077b7 (last change)
+=======
+}
+>>>>>>> 15d5ab7c9709316ff6b3ec62427b08f2cbb528a5

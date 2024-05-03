@@ -1,5 +1,5 @@
 # Étape 1: Construction avec Maven
-FROM maven:3.8.4-openjdk-11 as build
+FROM maven:3.8.4-openjdk-17 AS build  # Utilisation de Maven avec JDK 17
 WORKDIR /app
 
 # Copier le pom.xml et les sources
@@ -13,7 +13,7 @@ RUN mvn dependency:go-offline
 RUN mvn package -DskipTests
 
 # Étape 2: Exécution avec JRE
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jre-slim  # Utilisation de la version JRE slim de JDK 17 pour l'exécution
 WORKDIR /app
 
 # Copier le JAR empaqueté depuis l'étape de construction à l'étape d'exécution

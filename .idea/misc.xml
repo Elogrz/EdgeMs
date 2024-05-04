@@ -5,20 +5,13 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
-<<<<<<< HEAD
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/back/authentification/pom.xml" />
         <option value="$PROJECT_DIR$/back/eureka/pom.xml" />
         <option value="$PROJECT_DIR$/back/order/pom.xml" />
         <option value="$PROJECT_DIR$/back/payments/pom.xml" />
-=======
->>>>>>> faa946b (feature: add web config)
-=======
->>>>>>> faa946b6bbe91eaff6abe6869f5f74075e18f2c2
         <option value="$PROJECT_DIR$/back/product/pom.xml" />
       </list>
     </option>
-    <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

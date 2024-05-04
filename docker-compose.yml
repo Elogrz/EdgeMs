@@ -17,19 +17,19 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_DB=appDB
       - POSTGRES_HOST_AUTH_METHOD=trust
-  authentification:
-    image: authentification:latest
-    container_name: authentification
-    hostname: authentification
-    build:
-      context: ./back/authentification
-      dockerfile: Dockerfile
-    ports:
-      - "8882:8882"
-    depends_on:
-      - postgres
-      - config-server
-    restart: on-failure
+# authentification:
+#    image: authentification:latest
+#    container_name: authentification
+    #    hostname: authentification
+      #build:
+      #context: ./back/authentification
+      #dockerfile: Dockerfile
+      #ports:
+      #- "8882:8882"
+      #depends_on:
+      #- postgres
+      #- config-server
+    #restart: on-failure
   order:
     image: order:latest
     container_name: order
@@ -40,9 +40,8 @@ services:
     ports:
       - "8883:8883"
     depends_on:
-      - postgres
-      - config-server
-    restart: on-failure
+      eureka:
+        condition: service_healthy
   payment:
     image: payment:latest
     container_name: payments
@@ -53,9 +52,8 @@ services:
     ports:
       - "8884:8884"
     depends_on:
-      - postgres
-      - config-server
-    restart: on-failure
+      eureka:
+        condition: service_healthy
   product:
     image: product:latest
     container_name: product
@@ -66,9 +64,8 @@ services:
     ports:
       - "8885:8885"
     depends_on:
-      - postgres
-      - config-server
-    restart: on-failure
+      eureka:
+        condition: service_healthy
   eureka:
     image: eureka:latest
     container_name: eureka
@@ -77,10 +74,16 @@ services:
       context: ./back/eureka
       dockerfile: Dockerfile
     ports:
-      - "8886:8886"
+      - "8083:8083"
     depends_on:
-      - postgres
-      - config-server
+      config-server:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://eureka:8083/ || exit 1
+      interval: 5s
+      retries: 15
+      start_period: 20s
+      timeout: 10s
     restart: on-failure
   config-server:
     image: config-server:latest
@@ -93,3 +96,23 @@ services:
       - "8888:8888"
     depends_on:
       - postgres
+    healthcheck:
+      test: curl --fail http://config-server:8888/eureka/default || exit 1
+      interval: 5s
+      retries: 15
+      start_period: 20s
+      timeout: 10s
+
+  zuul:
+    image: zuul-gateway:latest
+    container_name: zuul
+    ports:
+      - "8889:8889"
+    build:
+      context: ./back/zuul
+      dockerfile: Dockerfile
+    depends_on:
+      eureka:
+        condition: service_healthy
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8083/eureka/

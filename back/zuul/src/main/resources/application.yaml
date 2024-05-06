@@ -1,11 +1,19 @@
-spring:
-  application:
-    name: zuul
-  cloud:
-    config:
-      uri: http://config-server:8888
-  profiles:
-    active: default
-  
-  config:
-    import: "configserver:http://config-server:8888"  # Importation de la configuration du serveur de config
+# Server configuration
+server.port=8889
+
+  # Application name
+spring.application.name=zuul
+
+  # Gateway Discovery
+spring.cloud.gateway.discovery.locator.enabled=true
+spring.cloud.gateway.discovery.locator.lower-case-service-id=true
+
+  # Eureka Client Configuration
+eureka.client.service-url.defaultZone=http://eureka:8083/eureka/
+eureka.client.register-with-eureka=true
+eureka.client.fetch-registry=true
+eureka.instance.prefer-ip-address=true
+
+  # Logging Configuration
+logging.level.root=INFO
+logging.level.com.fisa.gateway=DEBUG

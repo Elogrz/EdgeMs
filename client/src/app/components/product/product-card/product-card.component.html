@@ -1,0 +1,19 @@
+<p-card [header]="product.name" [style]="{ width: '300px', margin: '2rem' }">
+  <span class="text-green-500" *ngIf="product.quantity != undefined && product.quantity > 1">
+    {{product.quantity}} items available</span>
+  <span class="text-green-500" *ngIf="product.quantity != undefined && product.quantity === 1">
+    {{product.quantity}} item available</span>
+  <span *ngIf="product.quantity != undefined && product.quantity <= 0" class="text-red-500">Not available</span>
+  <ng-template pTemplate="header">
+    <div class="product-header">
+      <div class="image" [ngStyle]="{ 'background-image': 'url(' + product.imageUrl + ')'}"> </div>
+    </div>
+  </ng-template>
+  <p>{{product.description }}</p>
+  <ng-template pTemplate="footer">
+    <div style="display: flex; justify-content: right; align-items: center;">
+      <p-button (click)="addRemoveCartItem(product)" [disabled]="product.quantity != undefined && product.quantity <= 0"
+                icon="pi pi-cart-plus" [ngClass]="inCart ? 'cart-button-selected' : 'cart-button-unselected'" ></p-button>
+    </div>
+  </ng-template>
+</p-card>

@@ -1,0 +1,16 @@
+<div class="card">
+  <h4>Récapitulatif des articles</h4>
+  <div *ngFor="let product of products" class="recap-products" >
+    <span>{{product.name}}
+      <p-inputNumber class="input-nb-items" (onInput)="computeTotalPrice()"
+      [(ngModel)]="product['quantityToOrder']"
+      [showButtons]="true" [min]="1" [max]="product.quantity"
+      inputId="stacked"/>
+    </span>
+    <span *ngIf="product.price && product['quantityToOrder'] != undefined">{{product.price * product['quantityToOrder'] + ' €'}}</span>
+  </div>
+  <h4 class="total-price">
+    <span>Prix total</span>
+    <span>{{totalPrice}} €</span>
+  </h4>
+</div>

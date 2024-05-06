@@ -1,0 +1,21 @@
+.recap-products {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.total-price {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+:host {
+  ::ng-deep .input-nb-items .p-inputnumber{
+    margin-left: 1rem;
+    .p-inputtext {
+      width: 3rem;
+    }
+  }
+}
+

@@ -1,0 +1,36 @@
+<app-menu></app-menu>
+<div class="card">
+  <p-toast position="bottom-left"></p-toast>
+  <div class="flex" style="align-items: center">
+      <h3>Acheter des canards</h3>
+      <span style="margin-left: 3rem;">
+                  <button (click)="openShopDialog()"
+                          [ngStyle]="{ 'cursor': selectedProductToOrder.length > 0 ? 'pointer' : 'default',
+                          'background': 'none', 'border': 'none', 'vertical-align': 'middle' }">
+                    <span class="pi pi-shopping-cart" style="font-size: 2rem" pBadge
+                          [value]="selectedProductToOrder.length.toString()"></span>
+                  </button>
+        </span>
+  </div>
+  <ng-container *ngIf="products | async as productData">
+    <div class="product-grid">
+      <app-product-card *ngFor="let product of productData" [product]="product" (addedToCart)="addToCart($event)"
+                        (removedFromCart)="removeFromCart($event)"></app-product-card>
+    </div>
+  </ng-container>
+</div>
+
+<p-dialog header="Header" [(visible)]="isShopDialogOpen" [modal]="true" [style]="{ width: '50rem' }"
+          [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [draggable]="false">
+  <ng-template pTemplate="header">
+    <h3>Mon panier</h3>
+  </ng-template>
+  <div class="center-content">
+    <app-order-product #orderMaterialComponent (eventOrdered)="validOrder()" [products]="selectedProductToOrder"
+                       [totalPrice]="computeTotalPrice()"></app-order-product>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-times" (click)="closeShopDialog()" label="Annuler" pAutoFocus [autofocus]="true"></p-button>
+    <p-button icon="pi pi-cart-plus" (click)="submitOrder()" label="Commander" pAutoFocus type="submit"></p-button>
+  </ng-template>
+</p-dialog>

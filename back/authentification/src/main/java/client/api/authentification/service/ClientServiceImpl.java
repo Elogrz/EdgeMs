@@ -12,9 +12,12 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository clientRepository;
 
     @Override
-    public Client createClient(String username, String password) {
+    public Client createClient(String email, String password, String lastName, String firstName, Number tel) {
         Client client = new Client();
-        client.setUsername(username);
+        client.setEmail(email);
+        client.setTel(tel);
+        client.setLastName(lastName);
+        client.setFirstName(firstName);
         client.setPassword(password);
         return clientRepository.save(client);
     }
@@ -23,4 +26,10 @@ public class ClientServiceImpl implements ClientService {
     public void deleteClient(Long id) {
         clientRepository.deleteById(id);
     }
+
+    @Override
+    public Client getClientByUsername(String username) {
+        return clientRepository.findByUsername(username);
+    }
+
 }

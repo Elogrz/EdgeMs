@@ -3,10 +3,6 @@ package client.api.authentification.controller;
 import client.api.authentification.model.Client;
 import client.api.authentification.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,12 +12,9 @@ public class AuthController {
     @Autowired
     private ClientService clientService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
     @PostMapping("/register")
-    public Client register(@RequestParam String username, @RequestParam String password) {
-        return clientService.createClient(username, password);
+    public Client register(@RequestParam String email, @RequestParam String password, @RequestParam String lastName, @RequestParam String firstName, @RequestParam Number tel) {
+        return clientService.createClient(email, password, lastName, firstName, tel);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -31,22 +24,16 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        return "redirect:/home";
-    }
-
-    @GetMapping("/login")
-    public String getLoginPage() {
-        return "login";
+        Client client = clientService.getClientByUsername(username);
+        if (client != null && client.getPassword().equals(password)) {
+            return "redirect:/home";
+        } else {
+            return "redirect:/auth/login?error=true";
+        }
     }
 
     @GetMapping("/logout")
     public String logout() {
-        SecurityContextHolder.clearContext();
         return "redirect:/";
     }
 }

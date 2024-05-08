@@ -8,5 +8,5 @@ public interface ClientService {
 
     void deleteClient(Long id);
 
-    Client getClientByUsername(String username);
+    Client getClientByEmail(String email);
 }

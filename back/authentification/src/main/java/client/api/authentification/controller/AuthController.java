@@ -24,7 +24,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password) {
-        Client client = clientService.getClientByUsername(username);
+        Client client = clientService.getClientByEmail(username);
         if (client != null && client.getPassword().equals(password)) {
             return "redirect:/home";
         } else {

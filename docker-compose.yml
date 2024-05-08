@@ -17,19 +17,18 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_DB=appDB
       - POSTGRES_HOST_AUTH_METHOD=trust
-# authentification:
-#    image: authentification:latest
-#    container_name: authentification
-    #    hostname: authentification
-      #build:
-      #context: ./back/authentification
-      #dockerfile: Dockerfile
-      #ports:
-      #- "8882:8882"
-      #depends_on:
-      #- postgres
-      #- config-server
-    #restart: on-failure
+  authentification:
+    image: authentification:latest
+    container_name: authentification
+    hostname: authentification
+    build:
+      context: ./back/authentification
+      dockerfile: Dockerfile
+    ports:
+      - "8882:8882"
+    depends_on:
+      eureka:
+        condition: service_healthy
   order:
     image: order:latest
     container_name: order

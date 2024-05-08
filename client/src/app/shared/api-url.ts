@@ -1,18 +1,15 @@
 export const ApiUrls = {
   members: {
-    getAll: '/membres/all',
-    login: '/membres/login',
-    inscription: '/membres/inscription',
-    getOne: (id: string) => `/membres/${id}`
+    login: 'http://localhost:8889/authentification/auth/login',
+    inscription: '/authentification/auth/register',
   },
   product: {
-    getAll: '/product',
-    create: (id: string) => `/prodcut/${id}`
+    getAll: '/product/products',
   },
   order: {
-    create: '/commandes/passerCommande'
+    create: '/order/api/customer-orders'
   },
   payment: {
-    pay: '/payment'
+    pay: '/payments/api/payment'
   }
 }

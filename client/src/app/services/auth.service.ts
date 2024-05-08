@@ -20,16 +20,9 @@ export class AuthService {
 
   login(email: string, password: string): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      sessionStorage.setItem('currentUserId', '123');
-      sessionStorage.setItem('isSeller', 'true');
-      sessionStorage.setItem('currentMemberName', 'Rémy');
       resolve(true);
       this.findUser(email, password).subscribe(response => {
         if (response.membreId !== 'null') {
-          sessionStorage.setItem('currentUserId', response.membreId);
-          sessionStorage.setItem('currentGroupId', response.groupeId);
-          sessionStorage.setItem('currentMemberType', response.typeMembre);
-          sessionStorage.setItem('currentMemberName', response.membreName);
           resolve(true);
         } else {
           resolve(false);
@@ -41,18 +34,14 @@ export class AuthService {
   }
 
   logOut() {
-    sessionStorage.removeItem('currentUserId');
-    sessionStorage.removeItem('currentGroupId');
-    sessionStorage.removeItem('currentMemberType');
-    sessionStorage.removeItem('currentMemberName');
   }
 
   getToken(): string | null {
-    return sessionStorage.getItem('currentUserId');
+    return "token";
   }
 
   findUser(email: string, password: string): Observable<any> {
-    const loginUrl = environment.userApiHost + ApiUrls.members.login;
+    const loginUrl = environment.apiHost + ApiUrls.members.login;
     const body = JSON.stringify({email: email, password: password});
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -60,9 +49,10 @@ export class AuthService {
     return this.http.post(loginUrl, body, {headers: headers});
   }
 
-  signIn(member: Member): Observable<any> {
-    const signInUrl = environment.userApiHost + ApiUrls.members.inscription;
-    const body = JSON.stringify({
+  signUp(member: Member): Observable<any> {
+    const signInUrl = environment.apiHost + ApiUrls.members.inscription
+      + '?username=' + member.firstname + '&password=' + member.password;
+    /*const body = JSON.stringify({
       id: this.utils.generateId(12),
       nom: member.name,
       prenom: member.firstname,
@@ -72,11 +62,11 @@ export class AuthService {
       idCommande: '',
       email: member.email,
       password: member.password
-    });
+    });*/
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.post(signInUrl, body, {headers: headers});
+    return this.http.post(signInUrl,{headers: headers});
   }
 
   parseMember(rawMember: any): Member {

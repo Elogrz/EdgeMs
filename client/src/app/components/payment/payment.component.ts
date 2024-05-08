@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {InputNumberModule} from "primeng/inputnumber";
@@ -9,11 +9,11 @@ import {SharedModule} from "primeng/api";
 import {TooltipModule} from "primeng/tooltip";
 import {Member} from "../../models/member.model";
 import {regexValidator} from "../../services/regexValidator.service";
-import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MenuComponent} from "../menu/menu.component";
 import {PaymentService} from "../../services/payment-service";
 import {ProductService} from "../../services/product.service";
+import {Product} from "../../models/product.model";
 
 @Component({
   selector: 'app-payment',
@@ -33,10 +33,10 @@ import {ProductService} from "../../services/product.service";
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.scss'
 })
-export class PaymentComponent {
+export class PaymentComponent implements OnInit{
 
   @Output() eventPaymentValidated = new EventEmitter<Member>();
-
+  products!: Product[];
 
   paymentForm = this.fb.group({
     address: this.fb.group({
@@ -57,9 +57,13 @@ export class PaymentComponent {
   constructor(private fb: FormBuilder,
               private paymentService: PaymentService,
               private productService: ProductService,
-              private router: Router) { };
+              private router: Router,
+              private route: ActivatedRoute) { };
 
   public ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.products = JSON.parse(params['productsToOrder']);
+    });
   }
 
   submit(): boolean {

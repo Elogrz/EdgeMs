@@ -16,12 +16,12 @@ export class ProductService {
   }
 
   getProducts(): Observable<Product[]> {
-    const getAllProducts = environment.productApiHost + ApiUrls.product.getAll;
+    const getAllProducts = environment.apiHost + ApiUrls.product.getAll;
     return this.http.get<any>(getAllProducts);
   }
 
   orderProducts(order: Order): Observable<any> {
-    const orderUrl = environment.orderApiHost + ApiUrls.order.create;
+    const orderUrl = environment.apiHost + ApiUrls.order.create;
     const body = JSON.stringify({
       id: this.utils.generateId(12),
       clientId: order.clientId,

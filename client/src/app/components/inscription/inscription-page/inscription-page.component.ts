@@ -29,7 +29,7 @@ export class InscriptionPageComponent{
 
   constructor(private auth: AuthService,
               private router: Router) { }
-  signIn() {
+  signUp() {
     this.inscriptionForm?.submit();
   }
 

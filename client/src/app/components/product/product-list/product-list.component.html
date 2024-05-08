@@ -27,7 +27,7 @@
   </ng-template>
   <div class="center-content">
     <app-order-product #orderMaterialComponent (eventOrdered)="validOrder()" [products]="selectedProductToOrder"
-                       [totalPrice]="computeTotalPrice()"></app-order-product>
+                       [totalPrice]="computeTotalPrice()" (eventUpdateQuantityToOrder)="updateQuantityToOrder($event)"></app-order-product>
   </div>
   <ng-template pTemplate="footer">
     <p-button icon="pi pi-times" (click)="closeShopDialog()" label="Annuler" pAutoFocus [autofocus]="true"></p-button>

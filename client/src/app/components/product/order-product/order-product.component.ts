@@ -22,6 +22,7 @@ export class OrderProductComponent implements OnInit{
   @Input() products!: Product[];
   @Input() totalPrice!: number;
   @Output() eventOrdered = new EventEmitter<void>();
+  @Output() eventUpdateQuantityToOrder = new EventEmitter<Product[]>();
 
   constructor(private productService: ProductService) {
   }
@@ -58,6 +59,7 @@ export class OrderProductComponent implements OnInit{
         totalPrice += product.price * product['quantityToOrder'];
       }
     });
+    this.eventUpdateQuantityToOrder.emit(this.products);
     this.totalPrice = totalPrice;
   }
 

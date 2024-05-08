@@ -1,9 +1,6 @@
 <div class="card flex justify-content-center" style="margin-top: 0.5rem">
   <form [formGroup]="inscriptionForm" (ngSubmit)="submit()">
     <span class="p-float-label custom-margin">
-      <p-selectButton [options]="statusOptions" formControlName="memberType" optionLabel="label" optionValue="value"></p-selectButton>
-    </span>
-    <span class="p-float-label custom-margin">
       <input pInputText id="lastnameField" style="width: 22rem" required formControlName="lastName">
       <label for="lastnameField">Nom</label>
     </span>

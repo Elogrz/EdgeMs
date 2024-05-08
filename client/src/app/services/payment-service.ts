@@ -19,7 +19,7 @@ export class PaymentService {
   }
 
   pay(amount: number) {
-    const payUrl = environment.paymentApiHost + ApiUrls.payment.pay;
+    const payUrl = environment.apiHost + ApiUrls.payment.pay;
     const body = JSON.stringify({
       amount: amount
     });

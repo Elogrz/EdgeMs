@@ -50,6 +50,7 @@ import {Router} from "@angular/router";
 export class ProductListComponent implements OnInit{
   @ViewChild('orderMaterialComponent', {read: OrderProductComponent}) orderMaterialComponent?: OrderProductComponent;
   products?: Observable<Product[]>;
+  productsToOrder?: Product[];
   selectedProductToOrder: Product[] = [];
   columns: any[] = []
   isShopDialogOpen = false;
@@ -98,7 +99,8 @@ export class ProductListComponent implements OnInit{
 
   submitOrder() {
     this.isShopDialogOpen = false;
-    this.router.navigateByUrl("/pay-cart");
+    const param = JSON.stringify(this.productsToOrder);
+    this.router.navigateByUrl(`/pay-cart/${param}`);
   }
 
   validOrder() {
@@ -127,7 +129,10 @@ export class ProductListComponent implements OnInit{
       quantityToOrder: 1,
       ...product
     });
+  }
 
+  updateQuantityToOrder(products: Product[]) {
+    this.productsToOrder = products;
   }
 
   removeFromCart(product: Product) {

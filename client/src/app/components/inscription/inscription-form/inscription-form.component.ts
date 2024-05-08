@@ -45,23 +45,16 @@ export class InscriptionFormComponent implements OnInit{
 
   inscriptionForm = this.fb.group({
     firstName: ['', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
-    lastName: ['', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
-    email: ['', Validators.required, regexValidator(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)],
+    lastName: ['', regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
+    email: ['', regexValidator(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)],
     address: this.fb.group({
-      number: [null, Validators.required, regexValidator(/^\d{1,4}[A-Za-z]{0,3}$/)],
-      street: ['', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
-      city: ['', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
-      cp: [null, Validators.required, regexValidator(/^\d{5}$/)]
+      number: [null, regexValidator(/^\d{1,4}[A-Za-z]{0,3}$/)],
+      street: ['', regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
+      city: ['', regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
+      cp: [null, regexValidator(/^\d{5}$/)]
     }),
-    group:['', Validators.required],
     password: ['', Validators.required, [regexValidator(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)]],
-    memberType: new FormControl('Client')
   });
-
-  statusOptions: any[] = [
-    { label: 'Client', value: 'Client' },
-    { label: 'Actif', value: 'Actif' }
-  ];
 
 
   constructor(private fb: FormBuilder,
@@ -70,7 +63,6 @@ export class InscriptionFormComponent implements OnInit{
               private router: Router) { };
 
   public ngOnInit() {
-    this.inscriptionForm.patchValue({group: 'Valide'});
   }
 
   submit(): boolean {
@@ -84,34 +76,17 @@ export class InscriptionFormComponent implements OnInit{
       const password = this.inscriptionForm.get('password')?.value;
       const name = this.inscriptionForm.get('lastName')?.value;
       const memberType = this.inscriptionForm.get('memberType')?.value;
-      const groupName = this.inscriptionForm.get('group')?.value;
-      let groupId = undefined;
 
-      if(email && number && street && city && cp && city && firstname && password && name && groupId && memberType) {
-        this.memberService.signIn({
-          address: {
-            number: number,
-            street: street,
-            cp: cp,
-            city: city,
-          },
-          city: city,
-          email: email,
+      if( firstname && password) {
+        this.memberService.signUp({
           firstname: firstname,
-          password: password,
-          name: name,
-          groupId: groupId,
-          memberType: memberType
+          password: password
         }).subscribe( member => {
-          const email = member.email;
           const password = member.password;
-          const lastName = member.nom;
           const firstName = member.prenom;
-          if(email && password && lastName && firstName){
+          if(password && firstName){
             this.eventUserCreated.emit({
-              email: email,
               password: password,
-              name: lastName,
               firstname: firstname
             });
           }

@@ -6,7 +6,7 @@ export const ApiUrls = {
     getOne: (id: string) => `/membres/${id}`
   },
   product: {
-    getAll: '/products/',
+    getAll: '/product',
     create: (id: string) => `/prodcut/${id}`
   },
   order: {

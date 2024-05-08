@@ -6,7 +6,7 @@
   <span *ngIf="product.quantity != undefined && product.quantity <= 0" class="text-red-500">Not available</span>
   <ng-template pTemplate="header">
     <div class="product-header">
-      <div class="image" [ngStyle]="{ 'background-image': 'url(' + product.imageUrl + ')'}"> </div>
+      <div class="image" [ngStyle]="{ 'background-image': 'url(' + product.imageURL + ')'}"> </div>
     </div>
   </ng-template>
   <p>{{product.description }}</p>

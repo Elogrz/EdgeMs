@@ -12,6 +12,7 @@
         <module name="eureka" />
         <module name="payments" />
         <module name="zuul" />
+        <module name="customerorders" />
         <module name="order" />
       </profile>
     </annotationProcessing>
@@ -23,6 +24,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="authentification" options="-parameters" />
       <module name="config-server" options="-parameters" />
+      <module name="customerorders" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="order" options="-parameters" />
       <module name="payments" options="-parameters" />

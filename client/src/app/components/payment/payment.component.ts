@@ -38,7 +38,7 @@ export class PaymentComponent implements OnInit{
   @Output() eventPaymentValidated = new EventEmitter<Member>();
   products!: Product[];
 
-  paymentForm = this.fb.group({
+  /*paymentForm = this.fb.group({
     address: this.fb.group({
       number: [null, Validators.required, regexValidator(/^\d{1,4}[A-Za-z]{0,3}$/)],
       street: ['', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
@@ -50,6 +50,20 @@ export class PaymentComponent implements OnInit{
       cbValidationCode: [null, Validators.required, regexValidator(/^\d{3}$/)],
       cbExpirationDate: ['', Validators.required],
       cbNumber: [null, Validators.required, regexValidator(/^\d{16}$/)]
+    })
+  });*/
+  paymentForm = this.fb.group({
+    address: this.fb.group({
+      number: [12, Validators.required, regexValidator(/^\d{1,4}[A-Za-z]{0,3}$/)],
+      street: ['rue', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
+      city: ['ville', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
+      cp: [12345, Validators.required, regexValidator(/^\d{5}$/)]
+    }),
+    bankAccount: this.fb.group({
+      accountName: ['nom', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
+      cbValidationCode: [123, Validators.required, regexValidator(/^\d{3}$/)],
+      cbExpirationDate: ['09/35', Validators.required],
+      cbNumber: [1111111111111111, Validators.required, regexValidator(/^\d{16}$/)]
     })
   });
 
@@ -68,16 +82,16 @@ export class PaymentComponent implements OnInit{
 
   submit(): boolean {
     if(this.paymentForm && this.paymentForm.valid) {
-      const email = this.paymentForm.get('email')?.value;
       const number = this.paymentForm.get('address')?.get('number')?.value;
       const street = this.paymentForm.get('address')?.get('street')?.value;
       const cp = this.paymentForm.get('address')?.get('cp')?.value;
       const city = this.paymentForm.get('address')?.get('city')?.value;
-      const firstname = this.paymentForm.get('firstName')?.value;
-      const password = this.paymentForm.get('password')?.value;
-      const name = this.paymentForm.get('lastName')?.value;
+      const accountName = this.paymentForm.get('bankAccount')?.get('accountName')?.value;
+      const cbValidationCode = this.paymentForm.get('bankAccount')?.get('cbValidationCode')?.value;
+      const cbExpirationDate = this.paymentForm.get('bankAccount')?.get('cbExpirationDate')?.value;
+      const cbNumber = this.paymentForm.get('bankAccount')?.get('cbNumber')?.value;
 
-      if(email && number && street && city && cp && city && firstname && password && name) {
+      if(number && street && city && cp && city && accountName && cbValidationCode && cbNumber && cbExpirationDate) {
         this.paymentService.pay(1000).subscribe( payment => {
             const accepted = true;
             if(accepted){

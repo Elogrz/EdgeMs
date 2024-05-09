@@ -1,6 +1,6 @@
 export const ApiUrls = {
   members: {
-    login: 'http://localhost:8889/authentification/auth/login',
+    login: '/authentification/auth/login',
     inscription: '/authentification/auth/register',
   },
   product: {

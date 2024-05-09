@@ -20,33 +20,36 @@ export class AuthService {
 
   login(email: string, password: string): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      resolve(true);
-      this.findUser(email, password).subscribe(response => {
-        if (response.membreId !== 'null') {
+      /*this.loginToApi(email, password).subscribe(response => {
+        if (response.firstName !== 'null') {
+          sessionStorage.setItem('currentUserName', response.firstName);
           resolve(true);
         } else {
           resolve(false);
         }
       }, error => {
         resolve(false);
-      });
+      });*/
+      sessionStorage.setItem('currentUserName', 'connected');
+      resolve(true);
     });
   }
 
   logOut() {
+    sessionStorage.removeItem('currentUserName');
   }
 
   getToken(): string | null {
-    return "token";
+    return sessionStorage.getItem('currentUserName');
   }
 
-  findUser(email: string, password: string): Observable<any> {
-    const loginUrl = environment.apiHost + ApiUrls.members.login;
-    const body = JSON.stringify({email: email, password: password});
+  loginToApi(email: string, password: string): Observable<any> {
+    const loginUrl = environment.apiHost + ApiUrls.members.login
+      + '?username=' + email + '&password=' + password;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.post(loginUrl, body, {headers: headers});
+    return this.http.post(loginUrl, {}, {headers: headers});
   }
 
   signUp(member: Member): Observable<any> {

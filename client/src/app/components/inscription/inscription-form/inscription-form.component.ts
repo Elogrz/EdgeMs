@@ -45,13 +45,13 @@ export class InscriptionFormComponent implements OnInit{
 
   inscriptionForm = this.fb.group({
     firstName: ['', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
-    lastName: ['', regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
-    email: ['', regexValidator(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)],
+    lastName: ['', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
+    email: ['', Validators.required, regexValidator(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)],
     address: this.fb.group({
-      number: [null, regexValidator(/^\d{1,4}[A-Za-z]{0,3}$/)],
-      street: ['', regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
-      city: ['', regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
-      cp: [null, regexValidator(/^\d{5}$/)]
+      number: [null, Validators.required, regexValidator(/^\d{1,4}[A-Za-z]{0,3}$/)],
+      street: ['', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
+      city: ['', Validators.required, regexValidator(/^([A-Za-zéèàêâûôîùç\s-]{1,50})$/)],
+      cp: [null, Validators.required, regexValidator(/^\d{5}$/)]
     }),
     password: ['', Validators.required, [regexValidator(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)]],
   });
@@ -75,15 +75,23 @@ export class InscriptionFormComponent implements OnInit{
       const firstname = this.inscriptionForm.get('firstName')?.value;
       const password = this.inscriptionForm.get('password')?.value;
       const name = this.inscriptionForm.get('lastName')?.value;
-      const memberType = this.inscriptionForm.get('memberType')?.value;
 
-      if( firstname && password) {
+      if( email && number && street && city && cp && city && firstname && password && name) {
         this.memberService.signUp({
+          address: {
+            number: number,
+            street: street,
+            cp: cp,
+            city: city,
+          },
+          city: city,
+          email: email,
           firstname: firstname,
-          password: password
+          password: password,
+          name: name,
         }).subscribe( member => {
           const password = member.password;
-          const firstName = member.prenom;
+          const firstName = member.firstName;
           if(password && firstName){
             this.eventUserCreated.emit({
               password: password,
